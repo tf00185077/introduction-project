@@ -1,74 +1,47 @@
-# steps:
-#   # docker build
-#   - name: 'gcr.io/cloud-builders/docker'
-#     args:
-#       [
-#         'build',
-#         '-t',
-#         'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/introduction-project',
-#         '.'
-#       ]
-
-#   # 推送 Docker 镜像到容器注册表
-#   - name: 'gcr.io/cloud-builders/docker'
-#     args: ['push', 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/introduction-project']
-#   - name: 'gcr.io/cloud-builders/gcloud'
-#     args: [
-#         'run',
-#         'deploy',
-#         'introduction', # 替换为您的服务名称
-#         '--image',
-#         'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/introduction-project',
-#         '--platform',
-#         'managed',
-#         '--region',
-#         'asia-east1',
-#         '--allow-unauthenticated' # 根据您的需求配置是否允许匿名访问
-#       ]
-#   # Store images in Google Artifact Registry
-# images:
-#   - asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/introduction-project
 steps:
   # docker build
   - name: 'docker/compose'
     args:
-      - 'up',
-      - '--build',
-      - '-d',
+      - 'up'
+      - '--build'
+      - '-d'
     dir: 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project'
 
   # 推送 Docker 镜像到容器注册表
   - name: 'docker/compose'
     args: ['push']
-    dir:  asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project
+    dir: 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project'
 
+  # 在 Cloud Run 上部署服务（前端）
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
-      - 'run',
-      - 'deploy',
-      - 'introduction-nuxt', # 替换为您的服务名称
-      - '--image',
-      - 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend',
-      - '--platform',
-      - 'managed',
-      - '--region',
-      - 'asia-east1',
+      - 'run'
+      - 'deploy'
+      - 'introduction-nuxt' # 替换为您的服务名称
+      - '--image'
+      - 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend'
+      - '--platform'
+      - 'managed'
+      - '--region'
+      - 'asia-east1'
       - '--allow-unauthenticated' # 根据您的需求配置是否允许匿名访问
-      
-    env: 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend'
+    env:
+      - 'YOUR_FRONTEND_IMAGE_NAME=asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend'
 
+  # 在 Cloud Run 上部署服务（Nginx）
   - name: 'gcr.io/cloud-builders/gcloud'
     args: 
-      - 'run',
-      - 'deploy',
-      - 'introduction-nginx', # 替换为您的服务名称
-      - '--image',
-      - 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/nginx',
-      - '--platform',
-      - 'managed',
-      - '--region',
-      - 'asia-east1',
-      - '--port',
-      - '80',
+      - 'run'
+      - 'deploy'
+      - 'introduction-nginx' # 替换为您的服务名称
+      - '--image'
+      - 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/nginx'
+      - '--platform'
+      - 'managed'
+      - '--region'
+      - 'asia-east1'
+      - '--port'
+      - '80'
       - '--allow-unauthenticated' # 根据您的需求配置是否允许匿名访问
-    env: 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/nginx'
+    env:
+      - 'YOUR_NGINX_IMAGE_NAME=asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/nginx'
