@@ -1,0 +1,32 @@
+steps:
+  # docker build
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        'asia-east1-docker.pkg.dev/bionic-store-417406/cloud-run-source-deploy/gcp-test',
+        '.'
+      ]
+
+  # 推送 Docker 镜像到容器注册表
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'asia-east1-docker.pkg.dev/bionic-store-417406/cloud-run-source-deploy/gcp-test']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: [
+        'run',
+        'deploy',
+        'gcp-test', # 替换为您的服务名称
+        '--image',
+        'asia-east1-docker.pkg.dev/bionic-store-417406/cloud-run-source-deploy/gcp-test',
+        '--platform',
+        'managed',
+        '--region',
+        'asia-east1',
+        '--port',
+        '80',  # 指定端口号为80
+        '--allow-unauthenticated' # 根据您的需求配置是否允许匿名访问
+      ]
+  # Store images in Google Artifact Registry
+images:
+  - asia-east1-docker.pkg.dev/bionic-store-417406/cloud-run-source-deploy/gcp-test
