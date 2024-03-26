@@ -13,17 +13,17 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'tag'
-      - 'frontend'
+      - 'introduce-project-frontend'
       - 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend'
     dir: '.'  # 指定 Docker Compose 文件的路径
 
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'tag'
-      - 'nginx'
+      - 'introduce-project-nginx'
       - 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/nginx'
     dir: '.'  # 指定 Docker Compose 文件的路径
-    
+
   # 推送 Docker 镜像到容器注册表
   - name: 'docker/compose'
     args: ['push']
