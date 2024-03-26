@@ -25,9 +25,11 @@ steps:
     dir: '.'  # 指定 Docker Compose 文件的路径
 
   # 推送 Docker 镜像到容器注册表
-  - name: 'docker/compose'
-    args: ['push']
-    dir: '.'  # 指定 Docker Compose 文件的路径
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend']
+    
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/nginx']
 
   # 在 Cloud Run 上部署服务（前端）
   - name: 'gcr.io/cloud-builders/gcloud'
