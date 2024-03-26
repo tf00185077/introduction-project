@@ -7,12 +7,12 @@ steps:
       - 'up'
       - '--build'
       - '-d'
-    dir: '/.'  # 指定 Docker Compose 文件的路径
+    dir: '.'  # 指定 Docker Compose 文件的路径
 
   # 推送 Docker 镜像到容器注册表
   - name: 'docker/compose'
     args: ['push']
-    dir: '/.'  # 指定 Docker Compose 文件的路径
+    dir: '.'  # 指定 Docker Compose 文件的路径
 
   # 在 Cloud Run 上部署服务（前端）
   - name: 'gcr.io/cloud-builders/gcloud'
