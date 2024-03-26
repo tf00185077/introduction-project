@@ -1,16 +1,53 @@
-FROM node:lts as build-stage
-WORKDIR /nuxtapp
-COPY . .
-RUN npm install
-RUN npm run build
-RUN rm -rf node_modules && \
-  NODE_ENV=production npm install \
+# ---
+# Base stage
+ARG NODE_VERSION
+
+FROM node:18-slim as base
+
+MAINTAINER "example@gmail.com"
+
+# This can influence how the application behaves, particularly in terms of logging, performance optimizations
+ENV NODE_ENV=production
+
+WORKDIR /app
+
+# ---
+# Build stage
+FROM base as build
+
+COPY package.json /app/
+
+# 安裝 yarn
+# --prefer-offline
+#
+#   use network only if dependencies are not available in local cache
+#
+# --frozen-lockfile
+#
+#   don't generate a lockfile and fail if an update is needed
+#
+# --non-interactive
+#
+#   do not show interactive prompts
+#
+# --production=false
+#
+#   install devDependencies
+RUN npm install \
   --prefer-offline \
-  --pure-lockfile \
+  --frozen-lockfile \
   --non-interactive \
-  --production=true
-FROM node:lts as prod-stage
-WORKDIR /nuxtapp
-EXPOSE 3000
-COPY --from=build-stage /nuxtapp/.output/  ./.output/
+  --production=false
+
+COPY . .
+
+RUN npm run build
+
+# ---
+# Run stage
+FROM base
+
+# Copy only the files needed to run the app
+COPY --from=build /app/.output /app/.output
+
 CMD [ "node", ".output/server/index.mjs" ]
