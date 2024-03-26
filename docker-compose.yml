@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  frontend:
+  asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend:
     container_name: frontend
     restart: on-failure
     build:
@@ -10,7 +10,7 @@ services:
     ports:
       - '3000:3000'
 
-  nginx:
+  asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/nginx:
     container_name: nginx
     restart: on-failure
     build: ./nginx
