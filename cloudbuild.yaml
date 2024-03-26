@@ -44,8 +44,7 @@ steps:
       - '--region'
       - 'asia-east1'
       - '--allow-unauthenticated'  # 根据您的需求配置是否允许匿名访问
-    env:
-      - 'YOUR_FRONTEND_IMAGE_NAME=asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend'
+    
 
   # 在 Cloud Run 上部署服务（Nginx）
   - name: 'gcr.io/cloud-builders/gcloud'
@@ -62,5 +61,4 @@ steps:
       - '--port'
       - '80'
       - '--allow-unauthenticated'  # 根据您的需求配置是否允许匿名访问
-    env:
-      - 'YOUR_NGINX_IMAGE_NAME=asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/nginx'
+    
