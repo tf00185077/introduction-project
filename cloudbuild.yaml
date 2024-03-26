@@ -32,11 +32,9 @@ steps:
   # docker build
   - name: 'docker/compose'
     args:
-      [
-        'up',
-        '--build',
-        '-d',
-      ]
+      - 'up',
+      - '--build',
+      - '-d',
     dir: 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project'
 
   # 推送 Docker 镜像到容器注册表
@@ -45,33 +43,32 @@ steps:
     dir:  asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project
 
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: [
-        'run',
-        'deploy',
-        'introduction-nuxt', # 替换为您的服务名称
-        '--image',
-        'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend',
-        '--platform',
-        'managed',
-        '--region',
-        'asia-east1',
-        '--allow-unauthenticated' # 根据您的需求配置是否允许匿名访问
-      ] 
+    args:
+      - 'run',
+      - 'deploy',
+      - 'introduction-nuxt', # 替换为您的服务名称
+      - '--image',
+      - 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend',
+      - '--platform',
+      - 'managed',
+      - '--region',
+      - 'asia-east1',
+      - '--allow-unauthenticated' # 根据您的需求配置是否允许匿名访问
+      
     env: 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend'
 
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: [
-        'run',
-        'deploy',
-        'introduction-nginx', # 替换为您的服务名称
-        '--image',
-        'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/nginx',
-        '--platform',
-        'managed',
-        '--region',
-        'asia-east1',
-        '--port',
-        '80',
-        '--allow-unauthenticated' # 根据您的需求配置是否允许匿名访问
-      ] 
+    args: 
+      - 'run',
+      - 'deploy',
+      - 'introduction-nginx', # 替换为您的服务名称
+      - '--image',
+      - 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/nginx',
+      - '--platform',
+      - 'managed',
+      - '--region',
+      - 'asia-east1',
+      - '--port',
+      - '80',
+      - '--allow-unauthenticated' # 根据您的需求配置是否允许匿名访问
     env: 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/nginx'
