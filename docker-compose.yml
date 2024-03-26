@@ -7,7 +7,6 @@ services:
       context: .
       args:
         - NODE_VERSION=18
-      image: asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend
     ports:
       - '3000:3000'
 
@@ -17,4 +16,3 @@ services:
     build: ./nginx
     ports:
       - '80:80'
-    image: asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/nginx
