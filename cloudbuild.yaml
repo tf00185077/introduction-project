@@ -17,9 +17,21 @@ steps:
 
   # 在 Cloud Run 上部署服务（Nginx）
 
-  - name: 'docker/compose'
-    args:
-      - 'up'
-      - '-d'
-    dir: '.'
-    
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: [
+        'run',
+        'deploy',
+        'introduction-project', # 替换为您的服务名称
+        '--image',
+        'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend',
+        '--platform',
+        'managed',
+        '--region',
+        'asia-east1',
+        '--port',
+        '80',  # 指定端口号为80
+        '--allow-unauthenticated' # 根据您的需求配置是否允许匿名访问
+      ]
+
+images:
+  - asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend
