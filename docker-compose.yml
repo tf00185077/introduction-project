@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: web_app
-    image: introduced-project
+    image: frontend
     restart: always
     ports:
       - "5000:80"
