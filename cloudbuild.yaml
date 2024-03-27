@@ -19,7 +19,6 @@ steps:
 
   - name: 'docker/compose'
     args:
-      - 'docker-compose.yml'
       - 'up'
       - '-d'
       - '.'
