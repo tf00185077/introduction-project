@@ -21,10 +21,5 @@ steps:
     args:
       - 'up'
       - '-d'
-      - '--platform'
-      - 'managed'
-      - '--region'
-      - 'asia-east1'
-      - '--allow-unauthenticated'
     dir: '.'
     
