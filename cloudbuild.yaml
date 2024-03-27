@@ -17,9 +17,14 @@ steps:
 
   # 在 Cloud Run 上部署服务（Nginx）
 
-- name: 'docker/compose'
-  args:
-    - 'up'
-    - '-d'
-  dir: '.' 
+  - name: 'docker/compose'
+    args:
+      - 'up'
+      - '-d'
+      - '--platform'
+      - 'managed'
+      - '--region'
+      - 'asia-east1'
+      - '--allow-unauthenticated'
+    dir: '.'
     
