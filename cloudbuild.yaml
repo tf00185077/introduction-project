@@ -1,64 +1,37 @@
 steps:
   # 使用 Docker Compose 构建镜像
-  - name: 'docker/compose'
-    args:
-      - '-f'
-      - 'docker-compose.yml'
-      - 'up'
-      - '--build'
-      - '-d'
-    dir: '.'  # 指定 Docker Compose 文件的路径
 
   # 将 Docker Compose 生成的映像标记为您希望推送到的目的地
   - name: 'gcr.io/cloud-builders/docker'
     args:
-      - 'tag'
-      - 'workspace_frontend'
+      - 'build'
+      - '-t'
       - 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend'
-    dir: '.'  # 指定 Docker Compose 文件的路径
-
-  - name: 'gcr.io/cloud-builders/docker'
-    args:
-      - 'tag'
-      - 'workspace_nginx'
-      - 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/nginx'
-    dir: '.'  # 指定 Docker Compose 文件的路径
+      - '.'
 
   # 推送 Docker 镜像到容器注册表
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend']
-    
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/nginx']
 
-  # 在 Cloud Run 上部署服务（前端）
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args:
-      - 'run'
-      - 'deploy'
-      - 'introduction-nuxt'  # 替换为您的服务名称
-      - '--image'
-      - 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend'
-      - '--platform'
-      - 'managed'
-      - '--region'
-      - 'asia-east1'
-      - '--allow-unauthenticated'  # 根据您的需求配置是否允许匿名访问
     
 
   # 在 Cloud Run 上部署服务（Nginx）
+
   - name: 'gcr.io/cloud-builders/gcloud'
-    args:
-      - 'run'
-      - 'deploy'
-      - 'introduction-nginx'  # 替换为您的服务名称
-      - '--image'
-      - 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/nginx'
-      - '--platform'
-      - 'managed'
-      - '--region'
-      - 'asia-east1'
-      - '--port'
-      - '80'
-      - '--allow-unauthenticated'  # 根据您的需求配置是否允许匿名访问
-    
+    args: [
+        'run',
+        'deploy',
+        'introduction-project', # 替换为您的服务名称
+        '--image',
+        'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend',
+        '--platform',
+        'managed',
+        '--region',
+        'asia-east1',
+        '--port',
+        '80',  # 指定端口号为80
+        '--allow-unauthenticated' # 根据您的需求配置是否允许匿名访问
+      ]
+
+images:
+  - asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend

@@ -1,53 +1,37 @@
-# ---
-# Base stage
-ARG NODE_VERSION
+# Author : Vongkeo KSV
 
-FROM node:18-slim as base
+# Pull the base image 
+FROM node:18.3.0-alpine3.14 as build-stage
 
-MAINTAINER "example@gmail.com"
-
-# This can influence how the application behaves, particularly in terms of logging, performance optimizations
-ENV NODE_ENV=production
-
+# set working directory
 WORKDIR /app
 
-# ---
-# Build stage
-FROM base as build
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
-COPY package.json /app/
+# Install dependencies
+RUN npm install
 
-# 安裝 yarn
-# --prefer-offline
-#
-#   use network only if dependencies are not available in local cache
-#
-# --frozen-lockfile
-#
-#   don't generate a lockfile and fail if an update is needed
-#
-# --non-interactive
-#
-#   do not show interactive prompts
-#
-# --production=false
-#
-#   install devDependencies
-RUN npm install \
-  --prefer-offline \
-  --frozen-lockfile \
-  --non-interactive \
-  --production=false
-
+# Copy all files
 COPY . .
 
-RUN npm run build
+# Build app
+RUN npm run build && npm run generate
 
-# ---
-# Run stage
-FROM base
+# nginx state for serving content
+FROM nginx:1.21.1-alpine as production-stage
 
-# Copy only the files needed to run the app
-COPY --from=build /app/.output /app/.output
+# remove the default nginx.conf
+RUN rm -rf /usr/share/nginx/html/*
 
-CMD [ "node", ".output/server/index.mjs" ]
+# Copy nginx configuration
+COPY ./nginx/default.conf /etc/nginx/conf.d
+
+# Copy static files from build-stage
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
+
+# start nginx in the foreground
+CMD ["nginx", "-g", "daemon off;"]
