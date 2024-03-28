@@ -28,10 +28,9 @@ RUN rm -rf /usr/share/nginx/html/*
 COPY ./nginx/default.conf /etc/nginx/conf.d
 
 # Copy static files from build-stage
-COPY --from=build-stage /app/dist /usr/share/nginx/html
-
+COPY --from=build-stage /app/.output/public /usr/share/nginx/html
 # Expose port 80
 EXPOSE 80
-
+ENV HOST 0.0.0.0
 # start nginx in the foreground
 CMD ["nginx", "-g", "daemon off;"]

@@ -13,12 +13,12 @@ const updateData = async (newData) => {
   });
 };
 onMounted(async () => {
-  const response = await fetch('/api/readJson')
+  const response = await fetch(`/api/readJson`)
   data.value = await response.json();
 });
 </script>
 <template>
-    <h1>123</h1>
+    <h1>{{ data }}</h1>
     <button @click="updateData">Fix Data</button>
 </template>
 <style lang="scss">

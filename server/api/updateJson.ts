@@ -1,8 +1,12 @@
 import { readFile, writeFile } from 'fs/promises';
-import { resolve } from 'path';
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
+// 将import.meta.url转换为路径
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export default defineEventHandler(async (event) => {
-  const filePath = resolve('./stores/skill.json');
+  const filePath = resolve(__dirname,'../../stores/skill.json');
 
   // 读取现有文件内容
   let fileContent;
