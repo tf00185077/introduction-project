@@ -32,6 +32,6 @@ RUN npm run build
 # COPY --from=build-stage /app/.output/public /usr/share/nginx/html
 
 # Expose port 80
-EXPOSE 3333
+EXPOSE 3000
 # start nginx in the foreground
 CMD ["node", ".output/server/index.mjs"]
