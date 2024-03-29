@@ -1,28 +1,27 @@
 <script setup>
-const data = ref(null);
+const res = ref(null);
 const updateData = async (newData) => {
-  await fetch('/api/updateJson', {
-    method: 'POST',
+  await fetch("/api/updateJson", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      id:3,
-      skill:"angular"
+      id: 3,
+      skill: "angular",
     }),
   });
 };
+const { data, refresh } = await useFetch(`api/readJson`, {server:false,immediate:false})
 onMounted(async () => {
-  const response = await fetch(`/api/readJson`)
-  data.value = await response.json();
+  refresh()
 });
 </script>
 <template>
-    <h1>{{ data }}</h1>
-    <button @click="updateData">Fix Data</button>
+  <div v-if="data">Data: {{ data }}</div>
 </template>
 <style lang="scss">
-h1{
-    color:$sub-color
+h1 {
+  color: $sub-color;
 }
 </style>
