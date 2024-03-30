@@ -5,38 +5,16 @@ export default defineNuxtConfig({
   pinia: {
     storesDirs: ["./stores/**", "./custom-folder/stores/**"],
   },
-  // nitro: {
-  //   devProxy: {
-  //     '/api': {
-  //       target: 'http://localhost',
-  //       changeOrigin: true
-  //     }
-  //   }
-  // },
+  css: [
+    '@/assets/css/main.scss',
+  ],
   vite: {
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: '@use "~/assets/css/main.scss" as *;',
-        },
-      },
-    },
-    server: {
-      proxy: {
-        // "/api": {
-        //   target: "http://localhost:80/server",
-        //   changeOrigin: true,
-          // rewrite: (path) => path.replace(/^\/api/, ""),
-        // },
-      },
-    },
-  },
-  // nitro: {
-  //   devProxy: {
-  //     "/api": {
-  //       target: "http://localhost/server/api",
-  //       changeOrigin: true,
-  //     },
-  //   },
-  // },
+    // css: {
+    //   preprocessorOptions: {
+    //     scss: {
+    //       additionalData: '@use "~/assets/css/main.scss" as *;',
+    //     },
+    //   },
+    // },
+  }
 });

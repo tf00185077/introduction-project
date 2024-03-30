@@ -1,3 +1,15 @@
-$primary: #fffb04;
-$sub-color:#00ffc8;
-$secondary: #E4A79D; 
+:root {
+  --primary-color: #ffffff;
+  --secondary-color: #000000;
+  --background-color: #7dc327;
+  --text-color: #333333;
+  --accent-color: #007bff;
+}
+
+body {
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+p {
+  color: var(--accent-color);
+}
