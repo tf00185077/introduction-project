@@ -1,11 +1,12 @@
 import { defineStore } from "pinia";
 export const useThemeStore = defineStore("themeStore", () => {
   type Theme = {
-    "--primary-color": string;
-    "--secondary-color": string;
     "--background-color": string;
-    "--text-color": string;
-    "--accent-color": string;
+    "--primary-text-color": string;
+    "--secondary-text-color": string;
+    "--primary-accent-color": string;
+    "--secondary-accent-color": string;
+    "--border-color": string;
   };
 
   // 定义一个包含所有主题和对应颜色的对象类型
@@ -15,18 +16,20 @@ export const useThemeStore = defineStore("themeStore", () => {
 
   const themeColors: ThemeColors = {
     light: {
-      "--primary-color": "#ffffff",
-      "--secondary-color": "#000000",
-      "--background-color": "#f0f0f0",
-      "--text-color": "#333333",
-      "--accent-color": "#007bff",
+      "--background-color": "#121212",
+      "--primary-text-color": "#E0E0E0",
+      "--secondary-text-color": "#BDBDBD",
+      "--primary-accent-color": "#03DAC5",
+      "--secondary-accent-color": "#BB86FC",
+      "--border-color": "#292929",
     },
     dark: {
-      "--primary-color": "#333333",
-      "--secondary-color": "#ffffff",
       "--background-color": "#121212",
-      "--text-color": "#ffffff",
-      "--accent-color": "#1a8cff",
+      "--primary-text-color": "#E0E0E0",
+      "--secondary-text-color": "#BDBDBD",
+      "--primary-accent-color": "#03DAC5",
+      "--secondary-accent-color": "#BB86FC",
+      "--border-color": "#292929",
     },
   };
 
@@ -36,8 +39,8 @@ export const useThemeStore = defineStore("themeStore", () => {
 
     // 使用 Object.entries 来确保键值对的类型安全
     Object.entries(theme).forEach(([property, value]) => {
-      root.style.setProperty(property, value);
+      // root.style.setProperty(property, value);
     });
-  }
-  return {  applyTheme };
+  };
+  return { applyTheme };
 });

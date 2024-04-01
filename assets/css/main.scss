@@ -1,15 +1,13 @@
 :root {
-  --primary-color: #ffffff;
-  --secondary-color: #000000;
-  --background-color: #7dc327;
-  --text-color: #333333;
-  --accent-color: #007bff;
+  --background-color: #2d2d2d;
+  --primary-text-color: #E0E0E0;
+  --secondary-text-color: #BDBDBD;
+  --primary-accent-color: #03DAC5;
+  --secondary-accent-color: #BB86FC;
+  --border-color: #292929;
 }
 
 body {
-  color: var(--text-color);
+  margin:0;
   background-color: var(--background-color);
-}
-p {
-  color: var(--accent-color);
 }
