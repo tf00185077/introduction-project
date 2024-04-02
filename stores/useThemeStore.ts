@@ -16,12 +16,12 @@ export const useThemeStore = defineStore("themeStore", () => {
 
   const themeColors: ThemeColors = {
     light: {
-      "--background-color": "#FAFAFA",
+      "--background-color": "#FFFFFF",
       "--primary-text-color": "#333333 ",
       "--secondary-text-color": "#757575",
       "--primary-accent-color": "#018786 ",
       "--secondary-accent-color": "#6200EE",
-      "--border-color": "#E0E0E0",
+      "--border-color": "#BDBDBD",
     },
     dark: {
       "--background-color": "#323232",
@@ -29,7 +29,7 @@ export const useThemeStore = defineStore("themeStore", () => {
       "--secondary-text-color": "#BDBDBD",
       "--primary-accent-color": "#03DAC5",
       "--secondary-accent-color": "#BB86FC",
-      "--border-color": "#606060",
+      "--border-color": "#BDBDBD ",
     },
   };
 
