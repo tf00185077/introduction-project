@@ -8,7 +8,7 @@ export const useThemeStore = defineStore("themeStore", () => {
     "--secondary-accent-color": string;
     "--border-color": string;
   };
-
+  const mode = ref<string|number>('light');
   // 定义一个包含所有主题和对应颜色的对象类型
   type ThemeColors = {
     [key: string]: Theme;
@@ -16,31 +16,33 @@ export const useThemeStore = defineStore("themeStore", () => {
 
   const themeColors: ThemeColors = {
     light: {
-      "--background-color": "#121212",
-      "--primary-text-color": "#E0E0E0",
-      "--secondary-text-color": "#BDBDBD",
-      "--primary-accent-color": "#03DAC5",
-      "--secondary-accent-color": "#BB86FC",
-      "--border-color": "#292929",
+      "--background-color": "#FAFAFA",
+      "--primary-text-color": "#333333 ",
+      "--secondary-text-color": "#757575",
+      "--primary-accent-color": "#018786 ",
+      "--secondary-accent-color": "#6200EE",
+      "--border-color": "#E0E0E0",
     },
     dark: {
-      "--background-color": "#121212",
+      "--background-color": "#323232",
       "--primary-text-color": "#E0E0E0",
       "--secondary-text-color": "#BDBDBD",
       "--primary-accent-color": "#03DAC5",
       "--secondary-accent-color": "#BB86FC",
-      "--border-color": "#292929",
+      "--border-color": "#606060",
     },
   };
 
   const applyTheme = (themeName: keyof typeof themeColors) => {
     const theme = themeColors[themeName];
+    mode.value = themeName
+    localStorage.setItem('theme',themeName.toString())
     const root = document.documentElement;
 
     // 使用 Object.entries 来确保键值对的类型安全
     Object.entries(theme).forEach(([property, value]) => {
-      // root.style.setProperty(property, value);
+      root.style.setProperty(property, value);
     });
   };
-  return { applyTheme };
+  return { mode,applyTheme };
 });

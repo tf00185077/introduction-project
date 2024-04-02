@@ -6,9 +6,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useThemeStore } from "./stores/useThemeStore"
+// import { useThemeStore } from "./stores/useThemeStore"
 const themeStore = useThemeStore()
 onMounted(()=>{
-  themeStore.applyTheme('light')
+  const theme = localStorage.getItem('theme')
+  themeStore.applyTheme(theme?theme:'light')
 })
 </script>
