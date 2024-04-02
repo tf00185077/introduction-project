@@ -1,12 +1,15 @@
 <template>
     <div class="header-outline">
         <ul>
-            <li>Introduction</li>
-            <li>Side Project</li>
+            <li><input type="radio" v-model="chooseHeader" id="Introduction" value="Introduction"><label for="Introduction">Introduction</label></li>
+            <li><input type="radio" v-model="chooseHeader" id="Side Project" value="Side Project"><label for="Side Project">Side Project</label></li>
         </ul>
         <SwitchButtonDarkAndLightThene></SwitchButtonDarkAndLightThene>
     </div>
 </template>
+<script lang="ts" setup>
+const chooseHeader = ref("Introduction")
+</script>
 <style lang="scss" scoped>
 .header-outline{
     box-sizing: border-box;
@@ -24,7 +27,16 @@
         list-style: none;
         color:var(--primary-text-color);
         li{
-            cursor:pointer;
+            input{
+                display:none;
+                &:checked + label{
+                    color:var(--primary-accent-color);
+                    text-shadow: 0 0 1px var(--primary-accent-color);
+                }
+            }
+            label{
+                cursor: pointer;
+            }
         }
     }
 }
