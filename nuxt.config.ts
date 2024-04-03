@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     server: {
       watch: {
         usePolling: true,
+        interval: 1000,
       },
     },
   },
