@@ -24,7 +24,7 @@ export const useThemeStore = defineStore("themeStore", () => {
       "--border-color": "#BDBDBD",
     },
     dark: {
-      "--background-color": "#323232",
+      "--background-color": "#000",
       "--primary-text-color": "#E0E0E0",
       "--secondary-text-color": "#BDBDBD",
       "--primary-accent-color": "#03DAC5",
