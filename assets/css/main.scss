@@ -1,13 +1,20 @@
 :root {
-  --background-color: #323232;
-  --primary-text-color: #E0E0E0;
-  --secondary-text-color: #BDBDBD;
-  --primary-accent-color: #03DAC5;
-  --secondary-accent-color: #BB86FC;
-  --border-color: #606060;
+    --background-color: #323232;
+    --primary-text-color: #e0e0e0;
+    --secondary-text-color: #bdbdbd;
+    --primary-accent-color: #03dac5;
+    --secondary-accent-color: #bb86fc;
+    --border-color: #606060;
 }
 
 body {
-  margin:0;
-  background-color: var(--background-color);
+    margin: 0;
+    background-color: var(--background-color);
+}
+ul {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    color: inherit;
 }
