@@ -9,12 +9,11 @@ export default defineNuxtConfig({
     '@/assets/css/main.scss',
   ],
   vite: {
-    // css: {
-    //   preprocessorOptions: {
-    //     scss: {
-    //       additionalData: '@use "~/assets/css/main.scss" as *;',
-    //     },
-    //   },
-    // },
-  }
+    server: {
+      watch: {
+        usePolling: true,
+      },
+    },
+  },
+
 });
