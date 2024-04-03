@@ -1,17 +1,22 @@
 [
-  {
-    "name": "vue"
-  },
-  {
-    "name": "react"
-  },
-  {
-    "name": "angular"
-  },
-  {
-    "name": "Js"
-  },
-  {
-    "name": "CSS"
-  }
+    {
+        "skill-name": "vue3.js",
+        "skill-level": 3
+    },
+    {
+        "skill-name": "css",
+        "skill-level": 3
+    },
+    {
+        "skill-name": "javascript",
+        "skill-level": 3
+    },
+    {
+        "skill-name": "docker",
+        "skill-level": 4
+    },
+    {
+        "skill-name": "html",
+        "skill-level": 5
+    }
 ]
