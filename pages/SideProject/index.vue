@@ -1,0 +1,8 @@
+<template>
+  <div>Side project</div>
+</template>
+<style scoped>
+div {
+  color: white;
+}
+</style>

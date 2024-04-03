@@ -2,27 +2,47 @@
   <div class="header-outline">
     <ul>
       <li>
-        <input
-          type="radio"
-          v-model="chooseHeader"
-          id="Introduction"
-          value="Introduction"
-        /><label for="Introduction">Introduction</label>
+        <NuxtLink @click="chooseHeader = 'introduction'" to="/">
+          <input
+            type="radio"
+            v-model="chooseHeader"
+            id="introduction"
+            value="introduction"
+          /><label for="introduction">Introduction</label></NuxtLink
+        >
       </li>
       <li>
-        <input
-          type="radio"
-          v-model="chooseHeader"
-          id="Side Project"
-          value="Side Project"
-        /><label for="Side Project">Side Project</label>
+        <NuxtLink @click="chooseHeader = 'SideProject'" to="/SideProject">
+          <input
+            type="radio"
+            v-model="chooseHeader"
+            id="Side Project"
+            value="SideProject"
+          /><label for="Side Project">Side Project</label></NuxtLink
+        >
+      </li>
+      <li>
+        <NuxtLink @click="chooseHeader = 'MyDoc'" to="/MyDoc">
+          <input
+            type="radio"
+            v-model="chooseHeader"
+            id="Documnet"
+            value="MyDoc"
+          /><label for="Documnet">Documnet</label></NuxtLink
+        >
       </li>
     </ul>
     <SwitchButtonDarkAndLightThene></SwitchButtonDarkAndLightThene>
   </div>
 </template>
 <script lang="ts" setup>
-const chooseHeader = ref("Introduction");
+const chooseHeader = ref("introduction");
+// watch(
+//   () => chooseHeader.value,
+//   () => {
+//     navigateTo(`${chooseHeader.value}`);
+//   }
+// );
 </script>
 <style lang="scss" scoped>
 .header-outline {
