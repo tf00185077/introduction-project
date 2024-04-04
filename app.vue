@@ -16,7 +16,7 @@ onMounted(() => {
 .page-leave-active {
   transition: opacity .4s, filter .4s, transform .4s;
   position:absolute;
-  width:100%;
+  width:90%;
 }
 
 /* 初始狀態：不透明，無模糊，未旋轉 */

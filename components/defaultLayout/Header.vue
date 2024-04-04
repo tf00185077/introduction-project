@@ -1,48 +1,47 @@
 <template>
-  <div class="header-outline">
-    <ul>
-      <li>
-        <NuxtLink @click="chooseHeader = 'introduction'" to="/">
-          <input
-            type="radio"
-            v-model="chooseHeader"
-            id="introduction"
-            value="introduction"
-          /><label for="introduction">Introduction</label></NuxtLink
-        >
-      </li>
-      <li>
-        <NuxtLink @click="chooseHeader = 'SideProject'" to="/SideProject">
-          <input
-            type="radio"
-            v-model="chooseHeader"
-            id="Side Project"
-            value="SideProject"
-          /><label for="Side Project">Side Project</label></NuxtLink
-        >
-      </li>
-      <li>
-        <NuxtLink @click="chooseHeader = 'MyDoc'" to="/MyDoc">
-          <input
-            type="radio"
-            v-model="chooseHeader"
-            id="Documnet"
-            value="MyDoc"
-          /><label for="Documnet">Documnet</label></NuxtLink
-        >
-      </li>
-    </ul>
-    <SwitchButtonDarkAndLightThene></SwitchButtonDarkAndLightThene>
-  </div>
+  <KeepAlive>
+    <div class="header-outline">
+      <ul>
+        <li>
+          <NuxtLink @click="chooseHeader = '/'" to="/">
+            <input
+              type="radio"
+              v-model="chooseHeader"
+              id="introduction"
+              value="/"
+            /><label for="introduction">Introduction</label></NuxtLink
+          >
+        </li>
+        <li>
+          <NuxtLink @click="chooseHeader = '/SideProject'" to="/SideProject">
+            <input
+              type="radio"
+              v-model="chooseHeader"
+              id="Side Project"
+              value="/SideProject"
+            /><label for="Side Project">Side Project</label></NuxtLink
+          >
+        </li>
+        <li>
+          <NuxtLink @click="chooseHeader = '/MyDoc'" to="/MyDoc">
+            <input
+              type="radio"
+              v-model="chooseHeader"
+              id="Documnet"
+              value="/MyDoc"
+            /><label for="Documnet">Documnet</label></NuxtLink
+          >
+        </li>
+      </ul>
+      <SwitchButtonDarkAndLightThene></SwitchButtonDarkAndLightThene>
+    </div>
+  </KeepAlive>
 </template>
 <script lang="ts" setup>
-const chooseHeader = ref("introduction");
-// watch(
-//   () => chooseHeader.value,
-//   () => {
-//     navigateTo(`${chooseHeader.value}`);
-//   }
-// );
+const chooseHeader = ref(useRoute().path);
+onMounted(() => {
+  // navigateTo(useRoute().path);
+});
 </script>
 <style lang="scss" scoped>
 .header-outline {
