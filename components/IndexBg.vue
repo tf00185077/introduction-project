@@ -14,17 +14,35 @@
   background-position: center;
   background-attachment: fixed;
   opacity: 1;
-  animation: opacityAnime 3s infinite;
+  animation: opacityAnime 5s infinite linear, scale 20s infinite linear;
+  overflow: hidden;
 }
 @keyframes opacityAnime {
   0% {
     opacity: 1;
   }
   50% {
-    opacity: 0.4;
+    opacity: 0.2;
   }
   100% {
     opacity: 1;
+  }
+}
+@keyframes scale {
+  0% {
+    background-size: 50%;
+  }
+  25% {
+    background-size: 70%;
+  }
+  50% {
+    background-size: 50%;
+  }
+  75% {
+    background-size: 30%;
+  }
+  100% {
+    background-size: 50%;
   }
 }
 </style>
