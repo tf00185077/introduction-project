@@ -8,13 +8,14 @@ export default defineNuxtConfig({
   css: [
     '@/assets/css/main.scss',
   ],
+  // plugins:["@/plugins/websocket.client.ts"],
   vite: {
-    server: {
-      watch: {
-        usePolling: true,
-        interval: 1000,
-      },
-    },
+    // server: {
+    //   watch: {
+    //     usePolling: true,
+    //     interval: 1000,
+    //   },
+    // },
   },
   app: {
     pageTransition: { name: 'page', mode: 'default' }
