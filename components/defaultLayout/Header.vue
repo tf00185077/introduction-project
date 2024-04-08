@@ -32,6 +32,16 @@
             /><label for="Documnet">Documnet</label></NuxtLink
           >
         </li>
+        <li>
+          <NuxtLink @click="chooseHeader = '/Socket'" to="/Socket">
+            <input
+              type="radio"
+              v-model="chooseHeader"
+              id="Socket"
+              value="/Socket"
+            /><label for="Socket">Socket</label></NuxtLink
+          >
+        </li>
       </ul>
       <SwitchButtonDarkAndLightThene></SwitchButtonDarkAndLightThene>
     </div>

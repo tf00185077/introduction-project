@@ -1,5 +1,5 @@
 <template>
   <div>
-    <p>Side Project</p>
+    <WebSocket />  
   </div>
 </template>
