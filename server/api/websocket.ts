@@ -9,6 +9,7 @@ export default defineWebSocketHandler({
   },
   close(peer) {
     console.log("closed WS", peer);
+    peer.publish(room, "someone lift the room");
   },
   error(peer, error) {
     console.log("error on WS", peer, error);
@@ -18,6 +19,7 @@ export default defineWebSocketHandler({
     onCalc(peer, message);
     peer.publish(room, message.text());
   },
+  
 });
 function onCalc(peer: Peer, message: Message) {
   if (message.text().startsWith("calc ")) {
