@@ -50,6 +50,7 @@
 <script lang="ts" setup>
 const chooseHeader = ref(useRoute().path);
 onMounted(() => {
+  console.log(useRoute().path);
   // navigateTo(useRoute().path);
 });
 </script>
