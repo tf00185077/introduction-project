@@ -1,12 +1,15 @@
 <template>
   <div class="side-bar-outline">
-    <ul class="projects">
-      <li class="project-name">
-        <!-- <div></div> -->
-      </li>
+    <ul class="projects" v-if="allProjects">
+      <SideProjectProjectDetailStructure v-for="(name,index) in allProjects" :projectName="name"></SideProjectProjectDetailStructure>
     </ul>
   </div>
 </template>
+<script setup lang="ts">
+const { data: allProjects } = await useFetch(
+  "/api/getProjectFolders"
+);
+</script>
 <style scoped lang="scss">
 .side-bar-outline {
   overflow: hidden;
@@ -20,5 +23,7 @@ ul.projects {
   color: var(--primary-text-color);
   margin: 0;
   padding: 0 36px 0 0;
+  flex-direction: column;
+  gap:16px;
 }
 </style>

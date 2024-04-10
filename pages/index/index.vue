@@ -1,6 +1,6 @@
 <template>
   <div>
-    <IndexBg></IndexBg>
+    <!-- <IndexBg></IndexBg> -->
     <SelfIntroduction></SelfIntroduction>
   </div>
 </template>
