@@ -1,9 +1,25 @@
 <template>
-  <div>
-    <WebSocket v-if="openSocket"/>
-    <button @click="openSocket = !openSocket">CLICK ME</button>
+  <div class="chatroom">
+    <ChatroomInitUser
+      v-if="!socketStatus"
+      @openSocket="openSocket"
+      v-model:userName="userName"
+    />
+    <ChatroomWebSocket @closeSocket="closeSocket" v-else v-model:userName="userName" />
   </div>
 </template>
 <script setup lang="ts">
-const openSocket = ref(false)
+const userName = ref("");
+const socketStatus = ref(false);
+const openSocket = () => {
+  socketStatus.value = true;
+};
+const closeSocket = () => {
+  socketStatus.value = false;
+}
 </script>
+<style>
+.chatroom{
+  position:relative
+}
+</style>
