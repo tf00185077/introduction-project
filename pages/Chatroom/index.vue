@@ -1,21 +1,21 @@
 <template>
-  <div class="chatroom">
-    <ChatroomInitUser
-      v-if="!socketStatus"
-      @openSocket="openSocket"
-      v-model:userName="userName"
-    />
-    <ChatroomWebSocket @closeSocket="closeSocket" v-else v-model:userName="userName" />
-  </div>
+    <div class="chatroom">
+      <ChatroomInitUser
+        v-if="!socketStatusStore.socketStatus"
+        @openSocket="openSocket"
+        v-model:userName="userName"
+      />
+      <ChatroomWebSocket @closeSocket="closeSocket" v-else v-model:userName="userName" />
+    </div>
 </template>
 <script setup lang="ts">
 const userName = ref("");
-const socketStatus = ref(false);
+const socketStatusStore = useSocketStatusStore()
 const openSocket = () => {
-  socketStatus.value = true;
+  socketStatusStore.openSocket();
 };
 const closeSocket = () => {
-  socketStatus.value = false;
+  socketStatusStore.closeSocket();
 }
 </script>
 <style>

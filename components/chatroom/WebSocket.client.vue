@@ -6,7 +6,7 @@
     </div>
     <Chatroom
       ref="chatroom"
-      v-model:history="history"
+      v-model:history="socketStatusStore.history"
       v-model:message="message"
       @sendData="sendData"
     ></Chatroom>
@@ -14,26 +14,31 @@
 </template>
 <script setup lang="ts">
 import Chatroom from "./Chatroom.vue";
+const socketStatusStore = useSocketStatusStore()
 // In prod: check if secure, then use wss://
 const wsProtocol = window.location.protocol === "https:" ? "wss" : "ws";
 const { status, data, send, open, close } = useWebSocket(
   `${wsProtocol}://${location.host}/api/websocket`,
   {
-    // heartbeat: {
-    //   interval: 10000,
-    // },
+    heartbeat: {
+      interval: 1000*60*30
+    },
   }
 );
 const emit = defineEmits(["closeSocket"]);
 const chatroom = ref<InstanceType<typeof Chatroom> | null>(null);
-const history = ref<string[]>([]);
 watch(data, (newValue: any) => {
-  history.value.push(`${newValue}`);
+  socketStatusStore.history.push(`${newValue}`);
 });
+watch(status, (newValue: any) => {
+  if (newValue === "CLOSED") {
+    socketStatusStore.history.push(`You have left the room.`);
+  }
+})
 const userName = defineModel("userName");
 const message = ref("");
 function sendData() {
-  history.value.push(`Me: ${message.value}`);
+  socketStatusStore.history.push(`Me: ${message.value}`);
   send(
     `${userName.value === "" ? "Anonymous" : userName.value}:${message.value}`
   );
@@ -43,6 +48,7 @@ function sendData() {
 const closeSocket = () => {
   emit("closeSocket");
 };
+
 onUnmounted(() => {
   close();
 });
