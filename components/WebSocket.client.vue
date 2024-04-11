@@ -29,7 +29,7 @@ function sendData() {
 
 <template>
   <div>
-    <h1>WebSocket In NUXT!</h1>
+    <h1>NUXT Chatroom</h1>
     <input v-model="userName" placeholder="userName" />
     <form @submit.prevent="sendData">
       <input v-model="message" />
