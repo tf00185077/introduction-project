@@ -2,44 +2,11 @@
   <KeepAlive>
     <div class="header-outline">
       <ul>
-        <li>
-          <NuxtLink @click="chooseHeader = '/'" to="/">
-            <input
-              type="radio"
-              v-model="chooseHeader"
-              id="introduction"
-              value="/"
-            /><label for="introduction">Introduction</label></NuxtLink
-          >
-        </li>
-        <li>
-          <NuxtLink @click="chooseHeader = '/SideProject'" to="/SideProject">
-            <input
-              type="radio"
-              v-model="chooseHeader"
-              id="Side Project"
-              value="/SideProject"
-            /><label for="Side Project">Side Project</label></NuxtLink
-          >
-        </li>
-        <li>
-          <NuxtLink @click="chooseHeader = '/MyDoc'" to="/MyDoc">
-            <input
-              type="radio"
-              v-model="chooseHeader"
-              id="Documnet"
-              value="/MyDoc"
-            /><label for="Documnet">Documnet</label></NuxtLink
-          >
-        </li>
-        <li>
-          <NuxtLink @click="chooseHeader = '/Socket'" to="/Socket">
-            <input
-              type="radio"
-              v-model="chooseHeader"
-              id="Socket"
-              value="/Socket"
-            /><label for="Socket">Socket</label></NuxtLink
+        <li v-for="page in pageList">
+          <input type="radio" v-model="chooseHeader" :id="'/'+page" :value="'/' + page" /><label
+            :for="'/' + page"
+            @click="navigateTo('/' + page)"
+            >{{ page }}</label
           >
         </li>
       </ul>
@@ -49,10 +16,7 @@
 </template>
 <script lang="ts" setup>
 const chooseHeader = ref(useRoute().path);
-onMounted(() => {
-  console.log(useRoute().path);
-  // navigateTo(useRoute().path);
-});
+const {data:pageList,refresh} = await useFetch("/api/getPages")
 </script>
 <style lang="scss" scoped>
 .header-outline {
