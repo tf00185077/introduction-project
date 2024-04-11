@@ -8,7 +8,7 @@ export const useThemeStore = defineStore("themeStore", () => {
     "--secondary-accent-color": string;
     "--border-color": string;
   };
-  const mode = ref<string|number>('light');
+  const mode = ref<string|number>('dark');
   // 定义一个包含所有主题和对应颜色的对象类型
   type ThemeColors = {
     [key: string]: Theme;
