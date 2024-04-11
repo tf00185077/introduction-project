@@ -1,5 +1,5 @@
 <template>
-  <div class="outline">
+  <div class="outline" @keyup.enter="sendUserName">
     <div class="user-hint">
       <p class="hint">Please Enter Your Name To Join The Room</p>
       <input
@@ -33,8 +33,14 @@ const containsNoSpecialChars = (str: string) => {
 .outline,
 .use-hint {
   width: 100%;
-  height: calc(100dvh - 84px);
-  border: 1px solid white;
+  height: calc(100dvh - 108px);
+  // position:fixed;
+  // top:80px;
+  // left:24px;
+  // right:24px;
+  // bottom:24px;
+  // border-radius:4px;
+  border: 1px solid var(--border-color);
   color: var(--primary-text-color);
   display: flex;
   align-items: center;

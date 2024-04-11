@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="history-container">
+    <div class="history-container" ref="container">
       <div class="log" v-for="message in history">
         <template v-if="message.split(':').length > 1">
           <p class="user">{{ message.split(":")[0] }}&nbsp;:</p>
@@ -23,11 +23,20 @@
 const history = defineModel<string[]>("history");
 const message = defineModel<string>("message");
 const emit = defineEmits(["sendData"]);
+const container = ref<HTMLDivElement | null>(null);
 const sendData = () => {
   if (message.value !== undefined && message.value.trim() !== "") {
     emit("sendData");
   }
 };
+const scrollToBottom = () => {
+  setTimeout(() => {
+    if (container.value) {
+      container.value.scrollTop = container.value.scrollHeight;
+    }
+  });
+};
+defineExpose({ scrollToBottom });
 </script>
 <style scoped lang="scss">
 .history-container {
@@ -35,6 +44,15 @@ const sendData = () => {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  height: calc(100dvh - 250px);
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--secondary-text-color);
+    border-radius: 3px;
+  }
   div.log {
     display: flex;
     padding: 0px;
@@ -45,6 +63,7 @@ const sendData = () => {
       margin: 0;
       padding: 0;
       color: var(--primary-text-color);
+      font-size:1.2rem;
     }
     .user {
       padding: 4px 8px;
@@ -58,7 +77,6 @@ const sendData = () => {
     .system {
       padding: 4px 8px;
       white-space: nowrap;
-
     }
   }
 }
@@ -70,9 +88,15 @@ const sendData = () => {
   width: calc(100dvw - 48px);
   display: flex;
   height: 40px;
+  border:1px solid var(--border-color);
   input {
     flex: 1;
     padding-left: 8px;
+    border:none;
+    font-size:1.2rem;
+    &:focus {
+      outline: none;
+    }
   }
   .send-btn {
     position: absolute;
@@ -80,6 +104,7 @@ const sendData = () => {
     top: 50%;
     right: 0;
     transform: translateY(-50%);
+    border:none;
     border-left: 1px solid var(--border-color);
     width: 40px;
     height: 100%;

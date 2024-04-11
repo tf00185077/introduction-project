@@ -5,6 +5,7 @@
       <Btn @click="closeSocket" class="exit-btn">Exit Socket</Btn>
     </div>
     <Chatroom
+      ref="chatroom"
       v-model:history="history"
       v-model:message="message"
       @sendData="sendData"
@@ -12,6 +13,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import Chatroom from "./Chatroom.vue";
 // In prod: check if secure, then use wss://
 const wsProtocol = window.location.protocol === "https:" ? "wss" : "ws";
 const { status, data, send, open, close } = useWebSocket(
@@ -23,7 +25,7 @@ const { status, data, send, open, close } = useWebSocket(
   }
 );
 const emit = defineEmits(["closeSocket"]);
-
+const chatroom = ref<InstanceType<typeof Chatroom> | null>(null);
 const history = ref<string[]>([]);
 watch(data, (newValue: any) => {
   history.value.push(`${newValue}`);
@@ -36,6 +38,7 @@ function sendData() {
     `${userName.value === "" ? "Anonymous" : userName.value}:${message.value}`
   );
   message.value = "";
+  chatroom.value?.scrollToBottom();
 }
 const closeSocket = () => {
   emit("closeSocket");
