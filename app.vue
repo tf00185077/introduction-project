@@ -7,7 +7,7 @@
 const themeStore = useThemeStore();
 onMounted(() => {
   const theme = localStorage.getItem("theme");
-  themeStore.applyTheme(theme ? theme : "light");
+  themeStore.applyTheme(theme ? theme : "dark");
 });
 </script>
 <style>
