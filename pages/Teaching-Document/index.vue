@@ -1,5 +1,5 @@
 <template>
-  <div>Document</div>
+  <div>TEST - Document</div>
 </template>
 <style scoped>
 div {
