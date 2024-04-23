@@ -1,9 +1,0 @@
-apiVersion: skaffold/v3alpha1
-kind: Config
-deploy:
-  kubectl: {}
-profiles:
-- name: demo
-  manifests:
-    rawYaml:
-    - k8s-demo.yaml

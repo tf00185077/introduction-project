@@ -13,29 +13,35 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend']
 
-  - name: 'google/cloud-sdk:latest'
-    entrypoint: 'sh'
-    args:
-      gcloud deploy apply --file Skaffold.yml --region=asia-east1
+
 
   # 在 Cloud Run 上部署服务（Nginx）
 
-#   - name: 'gcr.io/cloud-builders/gcloud'
-#     args: [
-#         'run',
-#         'deploy',
-#         'introduction-project', # 替换为您的服务名称
-#         '--image',
-#         'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend',
-#         '--platform',
-#         'managed',
-#         '--region',
-#         'asia-east1',
-#         '--port',
-#         '3333',  # 指定端口号为80
-#         '--allow-unauthenticated' # 根据您的需求配置是否允许匿名访问
-#       ]
+  # - name: 'gcr.io/cloud-builders/gcloud'
+  #   args: [
+  #       'run',
+  #       'deploy',
+  #       'introduction-project', # 替换为您的服务名称
+  #       '--image',
+  #       'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend',
+  #       '--platform',
+  #       'managed',
+  #       '--region',
+  #       'asia-east1',
+  #       '--port',
+  #       '3333',  # 指定端口号为80
+  #       '--allow-unauthenticated' # 根据您的需求配置是否允许匿名访问
+  #     ]
 
+  - name: 'google/cloud-sdk:latest'
+  entrypoint: 'sh'
+  args:
+  - -xe
+  - -c
+  - |
+    gcloud deploy apply --file deploy/pipeline.yaml --region=asia-east-1
+    gcloud deploy apply --file deploy/dev.yaml --region=asia-east-1
+    gcloud deploy releases create 'app-release-${SHORT_SHA}' --delivery-pipeline=gke-cicd-pipeline --region=asia-east-1 --skaffold-file=skaffold.yaml
 # images:
 #   - asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend
 
