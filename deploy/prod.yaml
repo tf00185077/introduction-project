@@ -7,4 +7,4 @@ metadata:
 description: prod
 requireApproval: true
 gke:
-  cluster: projects/my-first-project/asia-east1/clusters/my-first-cluster
+ cluster: projects/my-first-project/locations/asia-east1/clusters/my-first-cluster
