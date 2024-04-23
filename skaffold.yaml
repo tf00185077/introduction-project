@@ -1,13 +1,11 @@
-apiVersion: skaffold/v4beta9
-kind: Config
-build:
-  tagPolicy:
-    gitCommit: {}
-  local: {}
-manifests:
-  rawYaml:
-    - ./kubernetes/*
-deploy:
-  kubectl: {}
-  logs:
-    prefix: container
+apiVersion: deploy.cloud.google.com/v1
+kind: DeliveryPipeline
+metadata:
+  name: gke-cicd-pipeline
+  labels:
+    app: cicd
+description: cicd delivery pipeline
+serialPipeline:
+  stages:
+  - targetId: dev
+  - targetId: prod
