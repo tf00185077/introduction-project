@@ -31,7 +31,7 @@ steps:
         '--port',
         '3333',  # 指定端口号为80
         '--file',
-        'Skaffold.yml'
+        'Skaffold.yml',
         '--allow-unauthenticated' # 根据您的需求配置是否允许匿名访问
       ]
 
