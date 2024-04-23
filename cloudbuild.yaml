@@ -16,9 +16,6 @@ steps:
   - name: 'google/cloud-sdk:latest'
     entrypoint: 'sh'
     args:
-    - xe
-    - -c
-    - |
       gcloud deploy apply --file Skaffold.yml --region=asia-east1
 
   # 在 Cloud Run 上部署服务（Nginx）
