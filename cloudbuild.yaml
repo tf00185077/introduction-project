@@ -1,7 +1,5 @@
 steps:
-  # 使用 Docker Compose 构建镜像
-
-  # 将 Docker Compose 生成的映像标记为您希望推送到的目的地
+  # 建構docker image
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'build'
@@ -9,13 +7,13 @@ steps:
       - 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend'
       - '.'
 
-  # 推送 Docker 镜像到容器注册表
+  # 推送 Docker Image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend']
 
 
 
-  # 在 Cloud Run 上部署服务（Nginx）
+  # 在 Cloud Run 上部署
 
   - name: 'gcr.io/cloud-builders/gcloud'
     args: [
@@ -33,14 +31,15 @@ steps:
         '--allow-unauthenticated' # 根据您的需求配置是否允许匿名访问
       ]
 
-  - name: 'google/cloud-sdk:latest'
-    entrypoint: 'sh'
-    args:
-    - -xe
-    - -c
-    - |
-      gcloud deploy apply --file=deploy-run-quickstart/clouddeploy.yaml --region=asia-east1 --project=bionic-store-417406
-      gcloud deploy releases create 'app-release-${SHORT_SHA}' --delivery-pipeline=my-introduction-project-demo --region=asia-east1 --skaffold-file=skaffold.yaml
+  # 在 GKE 上部署
+  # - name: 'google/cloud-sdk:latest'
+  #   entrypoint: 'sh'
+  #   args:
+  #   - -xe
+  #   - -c
+  #   - |
+  #     gcloud deploy apply --file=deploy-run-quickstart/clouddeploy.yaml --region=asia-east1 --project=bionic-store-417406
+  #     gcloud deploy releases create 'app-release-${SHORT_SHA}' --delivery-pipeline=my-introduction-project-demo --region=asia-east1 --skaffold-file=skaffold.yaml
 # gcloud deploy apply --file=deploy-run-quickstart/run-service-prod.yaml --region=asia-east1 --project=bionic-store-417406
 # images:
 #   - asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend
