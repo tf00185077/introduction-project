@@ -41,9 +41,9 @@ spec:
     app: "intro-demo"
   type: "LoadBalancer"
   loadBalancerIP: ""
-  template:
-    spec:
-      template:
-        spec:
-          containers:
-          - image: asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend
+  # template:
+  #   spec:
+  #     template:
+  #       spec:
+  #         containers:
+  #         - image: asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend

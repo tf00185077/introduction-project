@@ -15,6 +15,6 @@ deploy:
   kubectl: {}
   logs:
     prefix: container
-  cloudrun:
-    projectid: bionic-store-417406
-    region: asia-east1
+  # cloudrun:
+  #   projectid: bionic-store-417406
+  #   region: asia-east1
