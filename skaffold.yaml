@@ -10,7 +10,7 @@ profiles:
 - name: prod
   manifests:
     rawYaml:
-    - ./deploy-run-quickstart/run-service-prod.yaml
+    - ./kubernetes/*
 deploy:
   kubectl: {}
   logs:
