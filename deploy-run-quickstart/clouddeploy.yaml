@@ -14,7 +14,7 @@ kind: Target
 metadata:
   name: my-introduction-project-demo-prod
 description: Cloud Run production service
-run:
-  location: projects/bionic-store-417406/locations/asia-east1
+# run:
+#   location: projects/bionic-store-417406/locations/asia-east1
 gke:
   cluster: projects/bionic-store-417406/locations/asia-east1/clusters/my-first-cluster
