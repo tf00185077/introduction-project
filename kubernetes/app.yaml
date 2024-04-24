@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-deployment
+  name: my-introduciton-with-gke
 spec:
   replicas: 3
   selector:
@@ -18,15 +18,32 @@ spec:
           ports:
             - containerPort: 3000
 
-apiVersion: v1
-kind: Service
+---
+apiVersion: "v1"
+kind: "Service"
 metadata:
-  name: my-service
+  name: "my-introduction-with-gke"
+  namespace: "default"
+  labels:
+    app.kubernetes.io/managed-by: "google-cloud-deploy"
+    deploy.cloud.google.com/delivery-pipeline-id: "my-introduction-project-demo"
+    deploy.cloud.google.com/location: "asia-east1"
+    deploy.cloud.google.com/project-id: "bionic-store-417406"
+    deploy.cloud.google.com/release-id: "app-release-72a24fb"
+    deploy.cloud.google.com/target-id: "my-introduction-project-demo-prod"
+    skaffold.dev/run-id: "3137x1946cx0k1uf9wl16buydm3ld95a9oii1tw18j35cd7a5yu7"
 spec:
-  selector:
-    app: my-app
   ports:
-    - protocol: TCP
-      port: 3000
-      targetPort: 3000
-  type: LoadBalancer
+  - protocol: "TCP"
+    port: 3000
+    targetPort: 3000
+  selector:
+    app: "intro-demo"
+  type: "LoadBalancer"
+  loadBalancerIP: ""
+  template:
+    spec:
+      template:
+        spec:
+          containers:
+          - image: asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend
