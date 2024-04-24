@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: getting-started
+spec:
+  containers:
+  - name: intro-demo
+    image: asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend

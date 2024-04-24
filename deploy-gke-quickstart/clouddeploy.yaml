@@ -1,0 +1,18 @@
+apiVersion: deploy.cloud.google.com/v1
+kind: DeliveryPipeline
+metadata:
+  name: intro-demo
+description: main application pipeline
+serialPipeline:
+  stages:
+  - targetId: intro-demo-target-1
+    profiles: []
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: intro-demo-target-1
+description: development cluster
+gke:
+  cluster: projects/bionic-store-417406/locations/asia-east1/clusters/my-first-cluster

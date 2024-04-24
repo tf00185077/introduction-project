@@ -1,0 +1,27 @@
+gcloud deploy releases create test-release-012
+  --project=bionic-store-417406 
+  --region=asia-east1 
+  --delivery-pipeline=intro-demo 
+  --images=my-app-image=asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend
+
+---
+
+gcloud deploy apply --file=clouddeploy.yaml --region=asia-east1 --project=bionic-store-417406
+
+
+--DELETE--
+gcloud container clusters delete my-first-cluster --region=asia-east1 --project=bionic-store-417406
+gcloud deploy delete --file=clouddeploy.yaml --force --region=asia-east1 --project=bionic-store-417406
+
+------DEPLY CLOUD RUN-------
+
+gcloud deploy apply --file=clouddeploy.yaml --region=us-central1 --project=bionic-store-417406
+
+gcloud deploy releases create test-release-001 
+  --project=bionic-store-417406 
+  --region=asia-east1 
+  --delivery-pipeline=my-first-run-demo
+  --images=my-app-image=asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend
+
+  -----------------
+  projectNumber: '476152761029'

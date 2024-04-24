@@ -1,9 +1,17 @@
-apiVersion: deploy.cloud.google.com/v1
-kind: DeliveryPipeline
-metadata:
-  name: first-gke-cicd
-serialPipeline:
-  stages:
-  - targetId: first-gke-cicd-target-1
-    profiles:
-    - target-1
+apiVersion: skaffold/v4beta7
+kind: Config
+metadata: 
+  name: deploy-run-quickstart
+build:
+  tagPolicy:
+    gitCommit: {}
+  local: {}
+profiles:
+- name: prod
+  manifests:
+    rawYaml:
+    - ./deploy-run-quickstart/run-service-prod.yaml
+deploy:
+  kubectl: {}
+  logs:
+    prefix: container

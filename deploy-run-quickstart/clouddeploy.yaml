@@ -1,0 +1,20 @@
+apiVersion: deploy.cloud.google.com/v1
+kind: DeliveryPipeline
+metadata:
+  name: my-introduction-project-demo
+description: main application pipeline
+serialPipeline:
+  stages:
+  - targetId: my-introduction-project-demo-prod
+    profiles: []
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: my-introduction-project-demo-prod
+description: Cloud Run production service
+run:
+  location: projects/bionic-store-417406/locations/asia-east1
+gke:
+  cluster: projects/bionic-store-417406/locations/asia-east1/clusters/my-first-cluster

@@ -1,0 +1,62 @@
+apiVersion: deploy.cloud.google.com/v1
+kind: DeliveryPipeline
+metadata:
+  name: my-automation-demo-app-1
+description: Automation demonstration pipeline
+serialPipeline:
+  stages:
+  - targetId: automation-quickstart-staging
+    profiles: []
+    strategy:
+      canary:
+        runtimeConfig:
+          kubernetes:
+            serviceNetworking:
+              service: "my-service"
+              deployment: "my-deployment"
+        canaryDeployment:
+          percentages: [25]
+          verify: false
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: automation-quickstart-staging
+description: Staging cluster to demonstrate deploy automation
+gke:
+  cluster: projects/bionic-store-417406/locations/asia-east1/clusters/my-first-cluster
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Automation
+metadata:
+  name: my-automation-demo-app-1/promote
+description: promotes a release
+suspended: false
+serviceAccount: 476152761029-compute@developer.gserviceaccount.com
+selector:
+- targets:
+    id: automation-quickstart-dev
+rules:
+- promoteReleaseRule:
+    name: "promote-release"
+    wait: 1m
+    toTargetId: "@next"
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Automation
+metadata:
+  name: my-automation-demo-app-1/advance
+description: advances a rollout
+suspended: false
+serviceAccount: 476152761029-compute@developer.gserviceaccount.com
+selector:
+- targets:
+    id: automation-quickstart-staging
+rules:
+- advanceRolloutRule:
+    name: "advance-rollout"
+    sourcePhases: ["canary-25"]
+    wait: 1m
