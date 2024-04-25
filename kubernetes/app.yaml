@@ -13,16 +13,16 @@ spec:
         app: intro-demo
     spec:
       containers:
-        - name: intro-demo
-          image: asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend
-          ports:
-            - containerPort: 3000
-          volumeMounts:
-          - mountPath: /assets
-            name: cache-volume
-        volumes:
-          - name: cache-volume
-            emptyDir: {}
+      - name: intro-demo
+        image: asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend
+        volumeMounts:
+        - mountPath: /assets
+          name: cache-volume
+      volumes:
+        - name: cache-volume
+           emptyDir: {}
+      ports:
+        - containerPort: 3000
 
 ---
 apiVersion: "v1"
