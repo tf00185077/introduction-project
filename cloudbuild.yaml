@@ -39,7 +39,7 @@ steps:
     - -c
     - |
       gcloud deploy apply --file=deploy-run-quickstart/clouddeploy.yaml --region=asia-east1 --project=bionic-store-417406
-      gcloud deploy releases create 'app-release-${SHORT_SHA}' --delivery-pipeline=my-introduction-project-demo --region=asia-east1 --skaffold-file=skaffold.yaml
+      gcloud deploy releases create 'app-release-${SHORT_SHA}' --delivery-pipeline=my-introduction-project-demo --region=asia-east1 
 # gcloud deploy apply --file=deploy-run-quickstart/run-service-prod.yaml --region=asia-east1 --project=bionic-store-417406
 # images:
 #   - asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend
