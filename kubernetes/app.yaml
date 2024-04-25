@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: my-introduciton-with-gke
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: intro-demo
@@ -17,6 +17,12 @@ spec:
           image: asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend
           ports:
             - containerPort: 3000
+          volumeMounts:
+          - mountPath: /assets
+            name: cache-volume
+        volumes:
+          - name: cache-volume
+            emptyDir: {}
 
 ---
 apiVersion: "v1"
@@ -41,9 +47,3 @@ spec:
     app: "intro-demo"
   type: "LoadBalancer"
   loadBalancerIP: ""
-  # template:
-  #   spec:
-  #     template:
-  #       spec:
-  #         containers:
-  #         - image: asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend
