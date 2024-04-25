@@ -16,7 +16,7 @@ spec:
       - name: intro-demo
         image: asia-east1-docker.pkg.dev/bionic-store-417406/introduction-project/frontend
         volumeMounts:
-        - mountPath: /cache
+        - mountPath: /assets/cache
           name: cache-volume
         ports:
           - containerPort: 3000
